@@ -1,0 +1,1404 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🕌 المسابقة الدينية</title>
+
+<style>
+*{box-sizing:border-box}
+
+body{
+    margin:0;
+    font-family:Tahoma,Arial,sans-serif;
+    background:linear-gradient(135deg,#06150e,#123d29,#c9a227);
+    color:white;
+    min-height:100vh;
+}
+
+.container{
+    width:94%;
+    max-width:900px;
+    margin:30px auto;
+}
+
+.page{display:none}
+.page.active{display:block}
+
+.card{
+    background:rgba(0,0,0,.78);
+    border:2px solid #d4af37;
+    border-radius:20px;
+    padding:25px;
+    box-shadow:0 10px 30px rgba(0,0,0,.5);
+}
+
+h1,h2{
+    text-align:center;
+    color:#ffd85c;
+}
+
+h1{font-size:38px}
+
+.center{text-align:center}
+
+button{
+    border:0;
+    border-radius:12px;
+    padding:14px 22px;
+    margin:7px;
+    background:#ffd85c;
+    color:#111;
+    font-size:17px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+button:hover{opacity:.85}
+
+.back{
+    background:#555;
+    color:white;
+}
+
+.danger{
+    background:#c62828;
+    color:white;
+}
+
+.share-btn{
+    background:#25D366;
+    color:white;
+}
+
+.share-btn:hover{
+    background:#1ebe5d;
+    opacity:1;
+}
+
+input,select{
+    width:100%;
+    padding:14px;
+    margin:8px 0 15px;
+    border:2px solid #d4af37;
+    border-radius:10px;
+    font-size:16px;
+}
+
+.question,.admin-question{
+    background:rgba(255,255,255,.08);
+    padding:18px;
+    margin:15px 0;
+    border-radius:15px;
+}
+
+.answer{
+    display:block;
+    background:white;
+    color:#111;
+    padding:13px;
+    margin:8px 0;
+    border-radius:10px;
+}
+
+.answer input{
+    width:auto;
+    margin:0 8px;
+}
+
+.score{
+    text-align:center;
+    font-size:35px;
+    color:#ffd85c;
+    font-weight:bold;
+}
+
+.success{
+    text-align:center;
+    color:#70ff8b;
+    font-size:24px;
+    font-weight:bold;
+}
+
+.correct{
+    color:#70ff8b;
+    font-weight:bold;
+}
+
+hr{
+    border:0;
+    border-top:1px solid #ffffff33;
+    margin:25px 0;
+}
+
+a{text-decoration:none}
+
+
+.info{
+    text-align:center;
+    color:#ddd;
+    line-height:1.8;
+}
+
+.certificate{
+    background:#fffdf2;
+    color:#17251d;
+    border:12px double #c9a227;
+    border-radius:8px;
+    padding:35px 22px;
+    margin:20px auto;
+    max-width:760px;
+    text-align:center;
+    box-shadow:0 8px 25px rgba(0,0,0,.35);
+    font-family:Georgia,"Times New Roman",Tahoma,serif;
+}
+
+.certificate .cert-top{
+    font-size:42px;
+    margin-bottom:8px;
+}
+
+.certificate h2{
+    color:#8b6914;
+    font-size:32px;
+    margin:8px 0 20px;
+}
+
+.certificate .cert-title{
+    font-size:28px;
+    font-weight:bold;
+    color:#17452d;
+    margin:15px 0;
+}
+
+.certificate .student-name{
+    font-size:34px;
+    font-weight:bold;
+    color:#8b6914;
+    border-bottom:2px solid #c9a227;
+    display:inline-block;
+    padding:5px 20px;
+    margin:10px 0 18px;
+}
+
+.certificate .score-text{
+    font-size:21px;
+    line-height:1.8;
+}
+
+.certificate .cert-footer{
+    margin-top:28px;
+    font-size:16px;
+    color:#555;
+}
+
+.certificate-actions{
+    text-align:center;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<!-- الصفحة الرئيسية -->
+<div id="home" class="page active">
+<div class="card">
+
+<h1>🕌 المسابقة الدينية</h1>
+
+<h2>اختبر معلوماتك الدينية في 20 سؤال</h2>
+
+<p class="center">
+إذا حصلت على <b>16 درجة أو أكثر</b>
+تستحق شهادة تقدير 🏆
+</p>
+
+<div class="center">
+
+<button type="button" id="startButton">
+🚀 ابدأ المسابقة
+</button>
+
+<button type="button" id="adminButton">
+🔐 دخول المسؤول
+</button>
+
+<button type="button" class="share-btn" id="shareButton">
+📤 مشاركة المسابقة
+</button>
+
+</div>
+
+<hr>
+
+<h2>📱 تواصل معنا</h2>
+
+<p class="center">01225320419</p>
+<p class="center">01225320285</p>
+
+<div class="center">
+<a href="https://whatsapp.com/channel/0029VbCxGcA05MUiyPnzof3m" target="_blank">
+<button type="button">📢 قناة الواتساب</button>
+</a>
+</div>
+
+<p class="info">
+اضغط على زر المشاركة لإرسال رابط المسابقة لأي شخص.
+</p>
+
+</div>
+</div>
+
+<!-- دخول الطالب -->
+<div id="studentLogin" class="page">
+<div class="card">
+
+<h2>👤 دخول الطالب</h2>
+
+<label>اسم الطالب</label>
+<input id="studentName" type="text" placeholder="اكتب اسمك">
+
+<label>كلمة المرور</label>
+<input id="studentPassword" type="password" placeholder="اكتب كلمة المرور">
+
+<div class="center">
+
+<button type="button" id="studentStart">
+🚀 بدء المسابقة
+</button>
+
+<button type="button" class="back" id="studentBack">
+رجوع
+</button>
+
+</div>
+</div>
+</div>
+
+<!-- المسابقة -->
+<div id="quizPage" class="page">
+<div class="card">
+
+<h2>📝 المسابقة الدينية</h2>
+
+<div id="quizBox"></div>
+
+<div class="center">
+<button type="button" id="finishButton">
+✅ إنهاء المسابقة
+</button>
+</div>
+
+</div>
+</div>
+
+<!-- النتيجة -->
+<div id="resultPage" class="page">
+<div class="card">
+
+<h2>🏆 النتيجة</h2>
+
+<div id="resultBox"></div>
+
+<div id="certificateBox"></div>
+
+<div class="center">
+
+<button type="button" id="certificateButton" class="share-btn">
+🏆 عرض شهادة التقدير
+</button>
+
+<button type="button" id="shareResultButton" class="share-btn">
+📤 مشاركة النتيجة
+</button>
+
+<button type="button" id="saveCertificateButton" class="share-btn" style="display:none">
+💾 حفظ الشهادة كصورة
+</button>
+
+<button type="button" id="homeButton">
+🏠 الصفحة الرئيسية
+</button>
+
+</div>
+
+</div>
+</div>
+
+<!-- دخول المسؤول -->
+<div id="adminLogin" class="page">
+<div class="card">
+
+<h2>🔐 دخول المسؤول</h2>
+
+<label>اسم المستخدم</label>
+<input id="adminUsername" type="text" placeholder="اسم المستخدم">
+
+<label>كلمة المرور</label>
+<input id="adminPassword" type="password" placeholder="كلمة المرور">
+
+<div class="center">
+
+<button type="button" id="adminLoginButton">
+🔓 دخول
+</button>
+
+<button type="button" class="back" id="adminBack">
+رجوع
+</button>
+
+</div>
+
+</div>
+</div>
+
+<!-- لوحة المسؤول -->
+<div id="adminPage" class="page">
+<div class="card">
+
+<h2>⚙️ لوحة تحكم المسؤول</h2>
+
+<div class="center">
+
+<button type="button" id="addButton">
+➕ إضافة سؤال
+</button>
+
+<button type="button" id="resetButton">
+🔄 إعادة الأسئلة
+</button>
+
+<button type="button" class="danger" id="logoutButton">
+🚪 تسجيل الخروج
+</button>
+
+</div>
+
+<div id="formBox"></div>
+
+<hr>
+
+<h2>📚 الأسئلة الحالية</h2>
+
+<div id="adminBox"></div>
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+/* =========================
+   الأسئلة الأصلية
+========================= */
+
+var defaultQuestions = [
+
+{
+q:"من هو أول نبي؟",
+a:[
+"آدم عليه السلام",
+"نوح عليه السلام",
+"إبراهيم عليه السلام",
+"موسى عليه السلام"
+],
+correct:0
+},
+
+{
+q:"ما هي أطول سورة في القرآن الكريم؟",
+a:[
+"آل عمران",
+"البقرة",
+"النساء",
+"المائدة"
+],
+correct:1
+},
+
+{
+q:"كم عدد الصلوات المفروضة؟",
+a:[
+"ثلاث",
+"أربع",
+"خمس",
+"ست"
+],
+correct:2
+},
+
+{
+q:"ما هي أول سورة في القرآن الكريم؟",
+a:[
+"الفاتحة",
+"البقرة",
+"الإخلاص",
+"الناس"
+],
+correct:0
+},
+
+{
+q:"من هو النبي الذي ابتلعه الحوت؟",
+a:[
+"يونس عليه السلام",
+"يوسف عليه السلام",
+"أيوب عليه السلام",
+"هود عليه السلام"
+],
+correct:0
+},
+
+{
+q:"ما هي أقصر سورة في القرآن الكريم؟",
+a:[
+"العصر",
+"الكوثر",
+"الفلق",
+"الناس"
+],
+correct:1
+},
+
+{
+q:"في أي شهر يصوم المسلمون؟",
+a:[
+"شعبان",
+"رجب",
+"رمضان",
+"محرم"
+],
+correct:2
+},
+
+{
+q:"من هو خاتم الأنبياء والمرسلين؟",
+a:[
+"موسى عليه السلام",
+"عيسى عليه السلام",
+"محمد ﷺ",
+"إبراهيم عليه السلام"
+],
+correct:2
+},
+
+{
+q:"إلى أين يتجه المسلمون في الصلاة؟",
+a:[
+"المسجد النبوي",
+"الكعبة",
+"المسجد الأقصى",
+"جبل عرفات"
+],
+correct:1
+},
+
+{
+q:"كم عدد أركان الإسلام؟",
+a:[
+"ثلاثة",
+"أربعة",
+"خمسة",
+"ستة"
+],
+correct:2
+},
+
+{
+q:"ما اسم أم النبي محمد ﷺ؟",
+a:[
+"آمنة بنت وهب",
+"خديجة بنت خويلد",
+"فاطمة الزهراء",
+"حليمة السعدية"
+],
+correct:0
+},
+
+{
+q:"ما اسم والد النبي محمد ﷺ؟",
+a:[
+"أبو طالب",
+"عبد الله",
+"عبد المطلب",
+"حمزة"
+],
+correct:1
+},
+
+{
+q:"ما السورة التي لا تبدأ بالبسملة؟",
+a:[
+"التوبة",
+"الأنفال",
+"يوسف",
+"الفتح"
+],
+correct:0
+},
+
+{
+q:"من هو النبي الذي كلمه الله؟",
+a:[
+"إبراهيم عليه السلام",
+"موسى عليه السلام",
+"نوح عليه السلام",
+"داود عليه السلام"
+],
+correct:1
+},
+
+{
+q:"ما الليلة التي هي خير من ألف شهر؟",
+a:[
+"ليلة الإسراء",
+"ليلة القدر",
+"ليلة الجمعة",
+"ليلة النصف من شعبان"
+],
+correct:1
+},
+
+{
+q:"كم عدد أركان الإيمان؟",
+a:[
+"أربعة",
+"خمسة",
+"ستة",
+"سبعة"
+],
+correct:2
+},
+
+{
+q:"ما أول مسجد وضع للناس؟",
+a:[
+"المسجد النبوي",
+"المسجد الأقصى",
+"المسجد الحرام",
+"مسجد قباء"
+],
+correct:2
+},
+
+{
+q:"من هو النبي الذي أُلقي في النار؟",
+a:[
+"موسى عليه السلام",
+"إبراهيم عليه السلام",
+"نوح عليه السلام",
+"لوط عليه السلام"
+],
+correct:1
+},
+
+{
+q:"ما السورة التي تعدل ثلث القرآن؟",
+a:[
+"الفاتحة",
+"الكوثر",
+"الإخلاص",
+"الناس"
+],
+correct:2
+},
+
+{
+q:"من هو أول الخلفاء الراشدين؟",
+a:[
+"عمر بن الخطاب",
+"عثمان بن عفان",
+"علي بن أبي طالب",
+"أبو بكر الصديق"
+],
+correct:3
+}
+
+];
+
+/* تحميل الأسئلة المحفوظة */
+var savedQuestions = localStorage.getItem("religiousQuestions");
+
+var questions = savedQuestions
+? JSON.parse(savedQuestions)
+: JSON.parse(JSON.stringify(defaultQuestions));
+
+
+/* =========================
+   تغيير الصفحات
+========================= */
+
+function showPage(pageName){
+
+var pages=document.querySelectorAll(".page");
+
+for(var i=0;i<pages.length;i++){
+pages[i].classList.remove("active");
+}
+
+document.getElementById(pageName).classList.add("active");
+
+window.scrollTo(0,0);
+}
+
+
+/* =========================
+   مشاركة الموقع
+========================= */
+
+document.getElementById("shareButton").onclick = async function(){
+
+var shareData = {
+title:"🕌 المسابقة الدينية",
+text:"شارك في المسابقة الدينية واختبر معلوماتك!",
+url:window.location.href
+};
+
+try{
+
+if(navigator.share){
+
+await navigator.share(shareData);
+
+}else{
+
+await navigator.clipboard.writeText(window.location.href);
+
+alert("✅ تم نسخ رابط المسابقة.\nيمكنك الآن إرساله لأي شخص.");
+
+}
+
+}catch(error){
+
+if(error.name !== "AbortError"){
+
+try{
+
+await navigator.clipboard.writeText(window.location.href);
+
+alert("✅ تم نسخ رابط المسابقة.");
+
+}catch(e){
+
+prompt("انسخ رابط المسابقة:",window.location.href);
+
+}
+
+}
+
+}
+
+};
+
+
+/* =========================
+   شهادة التقدير
+========================= */
+
+var lastScore = 0;
+
+function showCertificate(){
+
+var name = localStorage.getItem("studentName") || "الطالب";
+
+var total = questions.length;
+
+var certificateBox = document.getElementById("certificateBox");
+
+certificateBox.innerHTML =
+"<div id='certificate' class='certificate'>"+
+"<div class='cert-top'>🕌 🏆 🕌</div>"+
+"<h2>شهادة تقدير</h2>"+
+"<div class='cert-title'>تشهد المسابقة الدينية</div>"+
+"<p>بأن الطالب / الطالبة</p>"+
+"<div class='student-name'>"+escapeHtml(name)+"</div>"+
+"<p class='score-text'>"+
+"قد أتم المسابقة الدينية بنجاح<br>"+
+"وحصل على درجة<br>"+
+"<strong>"+lastScore+" / "+total+"</strong>"+
+"<br><br>"+
+"🎉 مع خالص التهاني والتقدير 🎉"+
+"</p>"+
+"<div class='cert-footer'>"+
+"شهادة تقدير إلكترونية<br>"+
+"🕌 المسابقة الدينية"+
+"</div>"+
+"</div>";
+
+document.getElementById("saveCertificateButton").style.display="inline-block";
+
+certificateBox.scrollIntoView({behavior:"smooth",block:"center"});
+
+}
+
+function escapeHtml(text){
+
+var div=document.createElement("div");
+div.textContent=text;
+return div.innerHTML;
+
+}
+
+
+/* =========================
+   حفظ الشهادة كصورة
+========================= */
+
+document.getElementById("saveCertificateButton").onclick=function(){
+
+var certificate=document.getElementById("certificate");
+
+if(!certificate){
+alert("اضغط أولاً على «عرض شهادة التقدير»");
+return;
+}
+
+var canvas=document.createElement("canvas");
+
+var scale=2;
+
+var width=900;
+var height=650;
+
+canvas.width=width*scale;
+canvas.height=height*scale;
+
+var ctx=canvas.getContext("2d");
+
+ctx.scale(scale,scale);
+
+ctx.fillStyle="#fffdf2";
+ctx.fillRect(0,0,width,height);
+
+ctx.strokeStyle="#c9a227";
+ctx.lineWidth=12;
+ctx.strokeRect(12,12,width-24,height-24);
+
+ctx.strokeStyle="#8b6914";
+ctx.lineWidth=3;
+ctx.strokeRect(28,28,width-56,height-56);
+
+ctx.textAlign="center";
+ctx.fillStyle="#17452d";
+
+ctx.font="bold 44px Tahoma";
+ctx.fillText("🕌  🏆  🕌",width/2,105);
+
+ctx.fillStyle="#8b6914";
+ctx.font="bold 48px Tahoma";
+ctx.fillText("شهادة تقدير",width/2,175);
+
+ctx.fillStyle="#333";
+ctx.font="26px Tahoma";
+ctx.fillText("تشهد المسابقة الدينية بأن الطالب / الطالبة",width/2,235);
+
+ctx.fillStyle="#8b6914";
+ctx.font="bold 42px Tahoma";
+ctx.fillText(localStorage.getItem("studentName") || "الطالب",width/2,310);
+
+ctx.fillStyle="#333";
+ctx.font="26px Tahoma";
+ctx.fillText("قد أتم المسابقة الدينية بنجاح",width/2,365);
+
+ctx.fillStyle="#17452d";
+ctx.font="bold 38px Tahoma";
+ctx.fillText("النتيجة: "+lastScore+" / "+questions.length,width/2,430);
+
+ctx.fillStyle="#555";
+ctx.font="22px Tahoma";
+ctx.fillText("🎉 مع خالص التهاني والتقدير 🎉",width/2,490);
+
+ctx.font="18px Tahoma";
+ctx.fillText("شهادة تقدير إلكترونية - المسابقة الدينية",width/2,550);
+
+var link=document.createElement("a");
+
+link.download="شهادة_تقدير.png";
+link.href=canvas.toDataURL("image/png");
+
+link.click();
+
+alert("✅ تم تجهيز شهادة التقدير وحفظها كصورة.");
+
+};
+
+
+/* =========================
+   مشاركة النتيجة
+========================= */
+
+document.getElementById("certificateButton").onclick=function(){
+showCertificate();
+};
+
+
+/* =========================
+   مشاركة النتيجة
+========================= */
+
+document.getElementById("shareResultButton").onclick = async function(){
+
+var name = localStorage.getItem("studentName") || "الطالب";
+var resultText = document.getElementById("resultBox").innerText;
+
+var shareData = {
+title:"🏆 نتيجة المسابقة الدينية",
+text:"نتيجة "+name+" في المسابقة الدينية:\n"+resultText,
+url:window.location.href
+};
+
+try{
+
+if(navigator.share){
+
+await navigator.share(shareData);
+
+}else{
+
+await navigator.clipboard.writeText(
+"🏆 نتيجة "+name+"\n"+resultText+"\n"+window.location.href
+);
+
+alert("✅ تم نسخ النتيجة والرابط.");
+
+}
+
+}catch(error){
+
+if(error.name !== "AbortError"){
+
+try{
+
+await navigator.clipboard.writeText(
+"🏆 نتيجة "+name+"\n"+resultText+"\n"+window.location.href
+);
+
+alert("✅ تم نسخ النتيجة والرابط.");
+
+}catch(e){
+
+prompt("انسخ النص:",shareData.text+"\n"+shareData.url);
+
+}
+
+}
+
+}
+
+};
+
+
+/* =========================
+   أزرار الصفحة الرئيسية
+========================= */
+
+document.getElementById("startButton").onclick=function(){
+showPage("studentLogin");
+};
+
+document.getElementById("adminButton").onclick=function(){
+showPage("adminLogin");
+};
+
+
+/* =========================
+   رجوع
+========================= */
+
+document.getElementById("studentBack").onclick=function(){
+showPage("home");
+};
+
+document.getElementById("adminBack").onclick=function(){
+showPage("home");
+};
+
+document.getElementById("homeButton").onclick=function(){
+showPage("home");
+};
+
+
+/* =========================
+   بدء المسابقة
+========================= */
+
+document.getElementById("studentStart").onclick=function(){
+
+var name=document.getElementById("studentName").value.trim();
+
+var password=document.getElementById("studentPassword").value.trim();
+
+if(name===""){
+alert("اكتب اسم الطالب");
+return;
+}
+
+if(password===""){
+alert("اكتب كلمة المرور");
+return;
+}
+
+localStorage.setItem("studentName",name);
+
+showQuiz();
+
+showPage("quizPage");
+
+};
+
+
+/* =========================
+   عرض الأسئلة
+========================= */
+
+function showQuiz(){
+
+var box=document.getElementById("quizBox");
+
+box.innerHTML="";
+
+for(var i=0;i<questions.length;i++){
+
+var q=questions[i];
+
+var html="";
+
+html+="<div class='question'>";
+
+html+="<h3>";
+html+=(i+1)+") "+q.q;
+html+="</h3>";
+
+for(var j=0;j<q.a.length;j++){
+
+html+="<label class='answer'>";
+
+html+="<input type='radio' ";
+
+html+="name='question"+i+"' ";
+
+html+="value='"+j+"'> ";
+
+html+=q.a[j];
+
+html+="</label>";
+
+}
+
+html+="</div>";
+
+box.innerHTML+=html;
+
+}
+
+}
+
+
+/* =========================
+   إنهاء المسابقة
+========================= */
+
+document.getElementById("finishButton").onclick=function(){
+
+var score=0;
+
+for(var i=0;i<questions.length;i++){
+
+var answer=document.querySelector(
+"input[name='question"+i+"']:checked"
+);
+
+if(!answer){
+
+alert("من فضلك أجب عن جميع الأسئلة");
+
+return;
+
+}
+
+if(parseInt(answer.value)===questions[i].correct){
+
+score++;
+
+}
+
+}
+
+lastScore = score;
+
+var name=localStorage.getItem("studentName") || "الطالب";
+
+var result=document.getElementById("resultBox");
+
+if(score>=16){
+
+result.innerHTML=
+"<p class='score'>"+
+score+" / "+questions.length+
+"</p>"+
+"<div class='success'>"+
+"🎉 مبروك يا "+name+
+"<br><br>"+
+"🏆 تستحق شهادة تقدير"+
+"</div>";
+
+}else{
+
+result.innerHTML=
+"<p class='score'>"+
+score+" / "+questions.length+
+"</p>"+
+"<p class='center'>"+
+"حاول مرة أخرى 💪"+
+"</p>";
+
+}
+
+showPage("resultPage");
+
+};
+
+
+/* =========================
+   دخول المسؤول
+========================= */
+
+document.getElementById("adminLoginButton").onclick=function(){
+
+var username=document.getElementById("adminUsername").value.trim();
+
+var password=document.getElementById("adminPassword").value.trim();
+
+if(username==="admin" && password==="123456"){
+
+renderAdmin();
+
+showPage("adminPage");
+
+}else{
+
+alert("اسم المستخدم أو كلمة المرور غير صحيحة");
+
+}
+
+};
+
+
+/* =========================
+   لوحة المسؤول
+========================= */
+
+function renderAdmin(){
+
+var box=document.getElementById("adminBox");
+
+box.innerHTML="";
+
+for(var i=0;i<questions.length;i++){
+
+var q=questions[i];
+
+var html="";
+
+html+="<div class='admin-question'>";
+
+html+="<h3>";
+html+=(i+1)+") "+q.q;
+html+="</h3>";
+
+html+="<p>1️⃣ "+q.a[0]+"</p>";
+html+="<p>2️⃣ "+q.a[1]+"</p>";
+html+="<p>3️⃣ "+q.a[2]+"</p>";
+html+="<p>4️⃣ "+q.a[3]+"</p>";
+
+html+="<p class='correct'>";
+html+="✅ الإجابة الصحيحة: ";
+html+=q.a[q.correct];
+html+="</p>";
+
+html+="<button onclick='editQuestion("+i+")'>";
+html+="✏️ تعديل";
+html+="</button>";
+
+html+="<button class='danger' onclick='deleteQuestion("+i+")'>";
+html+="🗑️ حذف";
+html+="</button>";
+
+html+="</div>";
+
+box.innerHTML+=html;
+
+}
+
+}
+
+
+/* =========================
+   إضافة سؤال
+========================= */
+
+document.getElementById("addButton").onclick=function(){
+
+var form=document.getElementById("formBox");
+
+form.innerHTML=
+
+"<div class='admin-question'>"+
+
+"<h3>➕ إضافة سؤال</h3>"+
+
+"<input id='newQ' placeholder='السؤال'>"+
+
+"<input id='newA1' placeholder='الإجابة الأولى'>"+
+
+"<input id='newA2' placeholder='الإجابة الثانية'>"+
+
+"<input id='newA3' placeholder='الإجابة الثالثة'>"+
+
+"<input id='newA4' placeholder='الإجابة الرابعة'>"+
+
+"<select id='newCorrect'>"+
+
+"<option value='0'>الإجابة الأولى صحيحة</option>"+
+
+"<option value='1'>الإجابة الثانية صحيحة</option>"+
+
+"<option value='2'>الإجابة الثالثة صحيحة</option>"+
+
+"<option value='3'>الإجابة الرابعة صحيحة</option>"+
+
+"</select>"+
+
+"<button onclick='addQuestion()'>"+
+"💾 حفظ السؤال"+
+"</button>"+
+
+"</div>";
+
+};
+
+
+/* =========================
+   حفظ سؤال جديد
+========================= */
+
+function addQuestion(){
+
+var q=document.getElementById("newQ").value.trim();
+
+var answers=[
+
+document.getElementById("newA1").value.trim(),
+document.getElementById("newA2").value.trim(),
+document.getElementById("newA3").value.trim(),
+document.getElementById("newA4").value.trim()
+
+];
+
+var correct=parseInt(
+document.getElementById("newCorrect").value
+);
+
+if(
+q==="" ||
+answers[0]==="" ||
+answers[1]==="" ||
+answers[2]==="" ||
+answers[3]===""
+){
+
+alert("من فضلك املأ جميع البيانات");
+
+return;
+
+}
+
+questions.push({
+q:q,
+a:answers,
+correct:correct
+});
+
+saveQuestions();
+
+document.getElementById("formBox").innerHTML="";
+
+renderAdmin();
+
+alert("تم إضافة السؤال بنجاح");
+
+}
+
+
+/* =========================
+   تعديل سؤال
+========================= */
+
+function editQuestion(index){
+
+var q=questions[index];
+
+document.getElementById("formBox").innerHTML=
+
+"<div class='admin-question'>"+
+
+"<h3>✏️ تعديل السؤال</h3>"+
+
+"<input id='editQ'>"+
+
+"<input id='editA1'>"+
+
+"<input id='editA2'>"+
+
+"<input id='editA3'>"+
+
+"<input id='editA4'>"+
+
+"<select id='editCorrect'>"+
+
+"<option value='0'>الإجابة الأولى صحيحة</option>"+
+
+"<option value='1'>الإجابة الثانية صحيحة</option>"+
+
+"<option value='2'>الإجابة الثالثة صحيحة</option>"+
+
+"<option value='3'>الإجابة الرابعة صحيحة</option>"+
+
+"</select>"+
+
+"<button onclick='saveEdit("+index+")'>"+
+"💾 حفظ التعديل"+
+"</button>"+
+
+"</div>";
+
+document.getElementById("editQ").value=q.q;
+document.getElementById("editA1").value=q.a[0];
+document.getElementById("editA2").value=q.a[1];
+document.getElementById("editA3").value=q.a[2];
+document.getElementById("editA4").value=q.a[3];
+document.getElementById("editCorrect").value=q.correct;
+
+}
+
+
+/* =========================
+   حفظ التعديل
+========================= */
+
+function saveEdit(index){
+
+var q=document.getElementById("editQ").value.trim();
+
+var answers=[
+
+document.getElementById("editA1").value.trim(),
+document.getElementById("editA2").value.trim(),
+document.getElementById("editA3").value.trim(),
+document.getElementById("editA4").value.trim()
+
+];
+
+var correct=parseInt(
+document.getElementById("editCorrect").value
+);
+
+if(
+q==="" ||
+answers[0]==="" ||
+answers[1]==="" ||
+answers[2]==="" ||
+answers[3]===""
+){
+
+alert("من فضلك املأ جميع البيانات");
+
+return;
+
+}
+
+questions[index]={
+q:q,
+a:answers,
+correct:correct
+};
+
+saveQuestions();
+
+document.getElementById("formBox").innerHTML="";
+
+renderAdmin();
+
+alert("تم تعديل السؤال");
+
+}
+
+
+/* =========================
+   حذف سؤال
+========================= */
+
+function deleteQuestion(index){
+
+if(confirm("هل تريد حذف هذا السؤال؟")){
+
+questions.splice(index,1);
+
+saveQuestions();
+
+renderAdmin();
+
+}
+
+}
+
+
+/* =========================
+   حفظ الأسئلة
+========================= */
+
+function saveQuestions(){
+
+localStorage.setItem(
+"religiousQuestions",
+JSON.stringify(questions)
+);
+
+}
+
+
+/* =========================
+   إعادة الأسئلة
+========================= */
+
+document.getElementById("resetButton").onclick=function(){
+
+if(confirm("هل تريد إعادة الأسئلة الأصلية؟")){
+
+localStorage.removeItem("religiousQuestions");
+
+location.reload();
+
+}
+
+};
+
+
+/* =========================
+   تسجيل الخروج
+========================= */
+
+document.getElementById("logoutButton").onclick=function(){
+
+showPage("home");
+
+};
+
+</script>
+
+</body>
+</html>
